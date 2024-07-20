@@ -12,18 +12,50 @@
 <body>
     <div class="d-flex flex-column justify-content-center m-2 me-3">
         <select id="tool-selection" class="form-select border border-2 border-primary-subtle rounded col-12 m-1">
-            <option value="date-difference-opt">Gün Farkı</option>
-            <option value="brutten-nete-opt">Brüt => Net</option>
-            <option value="netten-brute-opt">Net => Brüt</option>
+            <option value="date-difference-opt">Gün farkı hesapla</option>
+            <option value="calculator-opt">Hesap makinesi</option>
+            <option value="brutten-nete-opt">Brüten nete çevir</option>
+            <option value="netten-brute-opt">Netten brüte çevir</option>
         </select>
 
         <div id="date-difference">
-            <input class="border border-2 border-primary-subtle rounded m-1 p-1 pe-2 col-12" type="date"
-                id="end-date" />
-            <input class="border border-2 border-primary-subtle rounded m-1 p-1 pe-2 col-12" type="date"
-                id="start-date" />
-            <button id="calculate-btn" class="btn btn-primary m-1 mb-0 col-12">Hesapla</button>
+            <div class="row mt-2">
+                <input class="border border-2 border-primary-subtle p-1 ms-3 m-2 rounded col" type="date"
+                    id="end-date" />
+                <input class="border border-2 border-primary-subtle  p-1 m-2 rounded col" type="date" id="start-date" />
+            </div>
+            <button id="calculate-btn" class="btn btn-primary m-1 col-12">Hesapla</button>
             <p id="result" class="text-center m-2"></p>
+        </div>
+
+        <div id="calculator" style="display: none;">
+            <input type="text" class="col-12 m-1 mt-3" id="display" disabled>
+            <div class="buttons ps-2 m-1 mb-2">
+                <div class="row">
+                    <button class="button btn btn-primary col m-1" data-type="number" data-value="7">7</button>
+                    <button class="button btn btn-primary col m-1" data-type="number" data-value="8">8</button>
+                    <button class="button btn btn-primary col m-1" data-type="number" data-value="9">9</button>
+                    <button class="button btn btn-primary col m-1" data-type="operator" data-value="/">/</button>
+                </div>
+                <div class="row">
+                    <button class="button btn btn-primary col m-1" data-type="number" data-value="4">4</button>
+                    <button class="button btn btn-primary col m-1" data-type="number" data-value="5">5</button>
+                    <button class="button btn btn-primary col m-1" data-type="number" data-value="6">6</button>
+                    <button class="button btn btn-primary col m-1" data-type="operator" data-value="*">*</button>
+                </div>
+                <div class="row">
+                    <button class="button btn btn-primary col m-1" data-type="number" data-value="1">1</button>
+                    <button class="button btn btn-primary col m-1" data-type="number" data-value="2">2</button>
+                    <button class="button btn btn-primary col m-1" data-type="number" data-value="3">3</button>
+                    <button class="button btn btn-primary col m-1" data-type="operator" data-value="-">-</button>
+                </div>
+                <div class="row">
+                    <button class="button btn btn-primary col m-1" data-type="number" data-value="0">0</button>
+                    <button class="button btn btn-primary col m-1" data-type="clear" data-value="C">C</button>
+                    <button class="button btn btn-primary col m-1" data-type="equal" data-value="=">=</button>
+                    <button class="button btn btn-primary col m-1" data-type="operator" data-value="+">+</button>
+                </div>
+            </div>
         </div>
 
         <div id="brutten-nete" style="display: none;">
