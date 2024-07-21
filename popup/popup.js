@@ -85,8 +85,91 @@ function clearDisplay() {
 
 function calculate() {
   try {
-    display.value = eval(display.value);
+    display.value = evaluateExpression(display.value);
   } catch (error) {
     display.value = "Error";
+  }
+}
+
+function evaluateExpression(expression) {
+  let tokens = tokenize(expression);
+  let valueStack = [];
+  let operatorStack = [];
+
+  const precedence = {
+    "+": 1,
+    "-": 1,
+    "*": 2,
+    "/": 2,
+  };
+
+  for (let token of tokens) {
+    if (isNumber(token)) {
+      valueStack.push(parseFloat(token));
+    } else if (isOperator(token)) {
+      while (
+        operatorStack.length &&
+        precedence[operatorStack[operatorStack.length - 1]] >= precedence[token]
+      ) {
+        let operator = operatorStack.pop();
+        let b = valueStack.pop();
+        let a = valueStack.pop();
+        valueStack.push(applyOperator(a, b, operator));
+      }
+      operatorStack.push(token);
+    }
+  }
+
+  while (operatorStack.length) {
+    let operator = operatorStack.pop();
+    let b = valueStack.pop();
+    let a = valueStack.pop();
+    valueStack.push(applyOperator(a, b, operator));
+  }
+
+  return valueStack[0];
+}
+
+function tokenize(expression) {
+  let tokens = [];
+  let numberBuffer = [];
+
+  for (let char of expression) {
+    if (isNumber(char) || char === ".") {
+      numberBuffer.push(char);
+    } else if (isOperator(char)) {
+      if (numberBuffer.length) {
+        tokens.push(numberBuffer.join(""));
+        numberBuffer = [];
+      }
+      tokens.push(char);
+    }
+  }
+
+  if (numberBuffer.length) {
+    tokens.push(numberBuffer.join(""));
+  }
+
+  return tokens;
+}
+
+function isNumber(char) {
+  return !isNaN(char);
+}
+
+function isOperator(char) {
+  return ["+", "-", "*", "/"].includes(char);
+}
+
+function applyOperator(a, b, operator) {
+  switch (operator) {
+    case "+":
+      return a + b;
+    case "-":
+      return a - b;
+    case "*":
+      return a * b;
+    case "/":
+      return a / b;
   }
 }

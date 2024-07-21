@@ -11,4 +11,4 @@ This project made with [SimGus's chrome extension template](https://github.com/S
 - [ ] İhbar tazminatı hesaplama
 - [ ] Brütten nete / Netten brüte
 - [ ] Tebliğ tarihinden son günü hesaplama
-- [ ] Hesap makinesi
+- [x] Hesap makinesi (Tamamlandı, manifest v3 eval kullanımına izin vermediği için farklı bir yolla yapıldı. Daha sonra tekrar düzenlenecek.)
